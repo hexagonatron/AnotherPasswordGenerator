@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Secure Password Generator</title>
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+        <!-- Google Fonts -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+        <!-- Bootstrap core CSS -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css"
+            rel="stylesheet">
+        <!-- Material Design Bootstrap -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.14.0/css/mdb.min.css" rel="stylesheet">
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="row">
+                <h1 class="col-12 text-center">Password generator</h1>
+            </div>
+            <div class="row">
+                <textarea name="password-out" id="password-out" cols="30" rows="10"></textarea>
+            </div>
+            <div class="row length-options">
+                <div class="slider-container col-10">
+                    <input type="range" name="password-length-slider" id="password-length-slider" class="col-12">
+                </div>
+                <input type="text" name="password-length-box" id="password-length-box" class="col-2">
+            </div>
+            <div class="row char-options">
+                <div class="option-box col-12 col-md-6 d-flex flex-column justify-content-center align-items-center">
+                    <input type="checkbox" name="uppercase" id="uppercase-check">
+                    <label for="uppercase-check">Uppercase</label>
+                </div>
+                <div class="option-box col-12 col-md-6 d-flex flex-column justify-content-center align-items-center">
+                    <input type="checkbox" name="lowercase" id="lowercase-check">
+                    <label for="lowercase-check">Lowercase</label>
+                </div>
+                <div class="option-box col-12 col-md-6 d-flex flex-column justify-content-center align-items-center">
+                    <input type="checkbox" name="numbers" id="numbers-check">
+                    <label for="numbers-check">Numbers</label>
+                </div>
+                <div class="option-box col-12 col-md-6 d-flex flex-column justify-content-center align-items-center">
+                    <input type="checkbox" name="symbols" id="symbols-check">
+                    <label for="symbols-check">Symbols</label>
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- JQuery -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <!-- Bootstrap tooltips -->
+        <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+        <!-- Bootstrap core JavaScript -->
+        <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+        <!-- MDB core JavaScript -->
+        <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.14.0/js/mdb.min.js"></script>
+    </body>
+
+</html>
