@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Secure Password Generator</title>
+        <title>Password Generator</title>
         <!-- Font Awesome -->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
         <!-- Google Fonts -->
@@ -23,44 +23,47 @@
                 <div class="row m-3">
                     <h1 class="col-12 text-center">Password Generator</h1>
                 </div>
-                <div class="row mb-3">
-                    <textarea name="password-out" id="password-out" cols="30" rows="10" class="col-12"></textarea>
+                <div class="row">
+                    <div contenteditable="true" class="password-out" spellcheck="false">
+                    </div>
                 </div>
                 <div class="row length-options mb-2 d-flex flex-column-reverse align-items-center">
                     <div class="slider-container col-10">
-                        <input type="range" name="password-length-slider" id="password-length-slider" class="col-12 custom-range">
+                        <input type="range" name="password-length-slider" id="password-length-slider"
+                            class="col-12 custom-range">
                     </div>
-                    <input type="text" name="password-length-box" id="password-length-box" class="col-2 mb-2">
+                    <input type="number" min="8" max="128" name="password-length-box" id="password-length-box"
+                        class="col-2 mb-2">
                 </div>
                 <div class="row char-options">
                     <div
-                        class="option-box col-12 col-md-6 d-flex flex-md-column-reverse justify-content-between justify-content-md-center align-items-left mb-2 ">
+                        class="option-box col-12 col-md-6 d-flex flex-md-column-reverse justify-content-between justify-content-md-center align-items-left mb-2 pl-4">
                         <div class="custom-control custom-switch">
                             <input type="checkbox" id="customSwitches1" class="custom-control-input">
                             <label for="customSwitches1" class="custom-control-label">Uppercase</label>
                         </div>
                     </div>
                     <div
-                        class="option-box col-12 col-md-6 d-flex flex-md-column-reverse justify-content-between justify-content-md-center align-items-left mb-2">
+                        class="option-box col-12 col-md-6 d-flex flex-md-column-reverse justify-content-between justify-content-md-center align-items-left mb-2 pl-4">
                         <div class="custom-control custom-switch">
                             <input type="checkbox" id="customSwitches2" class="custom-control-input">
                             <label for="customSwitches2" class="custom-control-label">Lowercase</label>
                         </div>
                     </div>
                     <div
-                        class="option-box col-12 col-md-6 d-flex flex-md-column-reverse justify-content-between justify-content-md-center align-items-left mb-2">
+                        class="option-box col-12 col-md-6 d-flex flex-md-column-reverse justify-content-between justify-content-md-center align-items-left mb-2 pl-4">
                         <div class="custom-control custom-switch">
                             <input type="checkbox" id="customSwitches3" class="custom-control-input">
                             <label for="customSwitches3" class="custom-control-label">Numbers</label>
                         </div>
                     </div>
                     <div
-                        class="option-box col-12 col-md-6 d-flex flex-md-column-reverse justify-content-between justify-content-md-center align-items-left mb-2">
+                        class="option-box col-12 col-md-6 d-flex flex-md-column-reverse justify-content-between justify-content-md-center align-items-left mb-2 pl-4">
                         <div class="custom-control custom-switch">
                             <input type="checkbox" id="customSwitches4" class="custom-control-input">
                             <label for="customSwitches4" class="custom-control-label">Symbols</label>
                         </div>
-                        
+
 
                     </div>
                 </div>
@@ -85,6 +88,8 @@
         <!-- MDB core JavaScript -->
         <script type="text/javascript"
             src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.14.0/js/mdb.min.js"></script>
+        <!-- My JS -->
+        <script src="gen.js"></script>
     </body>
 
 </html>
