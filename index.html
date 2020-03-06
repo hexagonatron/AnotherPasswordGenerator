@@ -28,36 +28,46 @@
                 </div>
                 <div class="row length-options mb-2 d-flex flex-column-reverse align-items-center">
                     <div class="slider-container col-10">
-                        <input type="range" name="password-length-slider" id="password-length-slider" class="col-12">
+                        <input type="range" name="password-length-slider" id="password-length-slider" class="col-12 custom-range">
                     </div>
                     <input type="text" name="password-length-box" id="password-length-box" class="col-2 mb-2">
                 </div>
                 <div class="row char-options">
                     <div
-                        class="option-box col-12 col-md-6 d-flex flex-md-column-reverse justify-content-between justify-content-md-center align-items-center mb-2 ">
-                        <label for="uppercase-check">Uppercase</label>
-                        <input type="checkbox" name="uppercase" id="uppercase-check">
+                        class="option-box col-12 col-md-6 d-flex flex-md-column-reverse justify-content-between justify-content-md-center align-items-left mb-2 ">
+                        <div class="custom-control custom-switch">
+                            <input type="checkbox" id="customSwitches1" class="custom-control-input">
+                            <label for="customSwitches1" class="custom-control-label">Uppercase</label>
+                        </div>
                     </div>
                     <div
-                        class="option-box col-12 col-md-6 d-flex flex-md-column-reverse justify-content-between justify-content-md-center align-items-center mb-2">
-                        <label for="lowercase-check">Lowercase</label>
-                        <input type="checkbox" name="lowercase" id="lowercase-check">
+                        class="option-box col-12 col-md-6 d-flex flex-md-column-reverse justify-content-between justify-content-md-center align-items-left mb-2">
+                        <div class="custom-control custom-switch">
+                            <input type="checkbox" id="customSwitches2" class="custom-control-input">
+                            <label for="customSwitches2" class="custom-control-label">Lowercase</label>
+                        </div>
                     </div>
                     <div
-                        class="option-box col-12 col-md-6 d-flex flex-md-column-reverse justify-content-between justify-content-md-center align-items-center mb-2">
-                        <label for="numbers-check">Numbers</label>
-                        <input type="checkbox" name="numbers" id="numbers-check">
+                        class="option-box col-12 col-md-6 d-flex flex-md-column-reverse justify-content-between justify-content-md-center align-items-left mb-2">
+                        <div class="custom-control custom-switch">
+                            <input type="checkbox" id="customSwitches3" class="custom-control-input">
+                            <label for="customSwitches3" class="custom-control-label">Numbers</label>
+                        </div>
                     </div>
                     <div
-                        class="option-box col-12 col-md-6 d-flex flex-md-column-reverse justify-content-between justify-content-md-center align-items-center mb-2">
-                        <label for="symbols-check">Symbols</label>
-                        <input type="checkbox" name="symbols" id="symbols-check">
+                        class="option-box col-12 col-md-6 d-flex flex-md-column-reverse justify-content-between justify-content-md-center align-items-left mb-2">
+                        <div class="custom-control custom-switch">
+                            <input type="checkbox" id="customSwitches4" class="custom-control-input">
+                            <label for="customSwitches4" class="custom-control-label">Symbols</label>
+                        </div>
+                        
+
                     </div>
                 </div>
 
-                <div class="row buttons d-flex flex-column flex-md-row justify-content-around align-items-center px-3">
-                    <button class="gen-button mb-2 col-12" id="gen-button">Generate Password</button>
-                    <button class="copy-button col-12" id="copy-button">Copy to Clipboard</button>
+                <div class="row buttons d-flex flex-column flex-md-row justify-content-around align-items-left px-3">
+                    <button class="gen-button mb-2 col-12 btn btn-elegant" id="gen-button">Generate Password</button>
+                    <button class="copy-button col-12 btn btn-elegant" id="copy-button">Copy to Clipboard</button>
                 </div>
             </div>
         </div>
