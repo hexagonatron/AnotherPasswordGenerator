@@ -29,38 +29,38 @@
                 </div>
                 <div class="row length-options mb-2 d-flex flex-column-reverse align-items-center">
                     <div class="slider-container col-10">
-                        <input type="range" name="password-length-slider" id="password-length-slider"
+                        <input type="range"  min="8" max="128" name="password-length-slider" id="password-length-slider"
                             class="col-12 custom-range">
                     </div>
-                    <input type="number" min="8" max="128" name="password-length-box" id="password-length-box"
+                    <input type="number" value="12" min="8" max="128" name="password-length-box" id="password-length-box"
                         class="col-2 mb-2">
                 </div>
                 <div class="row char-options">
                     <div
                         class="option-box col-12 col-md-6 d-flex flex-md-column-reverse justify-content-between justify-content-md-center align-items-left mb-2 pl-4">
                         <div class="custom-control custom-switch">
-                            <input type="checkbox" id="customSwitches1" class="custom-control-input">
+                            <input type="checkbox" id="customSwitches1" class="custom-control-input upper-switch">
                             <label for="customSwitches1" class="custom-control-label">Uppercase</label>
                         </div>
                     </div>
                     <div
                         class="option-box col-12 col-md-6 d-flex flex-md-column-reverse justify-content-between justify-content-md-center align-items-left mb-2 pl-4">
                         <div class="custom-control custom-switch">
-                            <input type="checkbox" id="customSwitches2" class="custom-control-input">
+                            <input type="checkbox" id="customSwitches2" class="custom-control-input lower-switch">
                             <label for="customSwitches2" class="custom-control-label">Lowercase</label>
                         </div>
                     </div>
                     <div
                         class="option-box col-12 col-md-6 d-flex flex-md-column-reverse justify-content-between justify-content-md-center align-items-left mb-2 pl-4">
                         <div class="custom-control custom-switch">
-                            <input type="checkbox" id="customSwitches3" class="custom-control-input">
+                            <input type="checkbox" id="customSwitches3" class="custom-control-input number-switch">
                             <label for="customSwitches3" class="custom-control-label">Numbers</label>
                         </div>
                     </div>
                     <div
                         class="option-box col-12 col-md-6 d-flex flex-md-column-reverse justify-content-between justify-content-md-center align-items-left mb-2 pl-4">
                         <div class="custom-control custom-switch">
-                            <input type="checkbox" id="customSwitches4" class="custom-control-input">
+                            <input type="checkbox" id="customSwitches4" class="custom-control-input symbol-switch">
                             <label for="customSwitches4" class="custom-control-label">Symbols</label>
                         </div>
 
@@ -89,7 +89,7 @@
         <script type="text/javascript"
             src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.14.0/js/mdb.min.js"></script>
         <!-- My JS -->
-        <script src="gen.js"></script>
+        <script src="script.js"></script>
     </body>
 
 </html>

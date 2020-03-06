@@ -1,0 +1,30 @@
+
+#password-length-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    background: #adb5bd;
+}
+
+.custom-control-input:checked~.custom-control-label::before {
+    background-color: rgb(46, 46, 46);
+    border: rgb(46, 46, 46);
+}
+
+.password-out {
+    background-color: white;
+    color: black;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    width: 100%;
+}
+
+#password-length-box {
+    width: 40px;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+#password-length-box::-webkit-outer-spin-button, #password-length-box::-webkit-inner-spin-button{
+    -webkit-appearance: none;
+    margin: 0;
+}
