@@ -14,42 +14,54 @@
             rel="stylesheet">
         <!-- Material Design Bootstrap -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.14.0/css/mdb.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="style.css">
     </head>
 
-    <body>
+    <body class="bg-dark text-white">
         <div class="container col-12 col-md-6">
-            <div class="row mb-3">
-                <h1 class="col-12 text-center">Password generator</h1>
-            </div>
-            <div class="row mb-3">
-                <textarea name="password-out" id="password-out" cols="30" rows="10" class="col-12"></textarea>
-            </div>
-            <div class="row length-options mb-2">
-                <div class="slider-container col-10">
-                    <input type="range" name="password-length-slider" id="password-length-slider" class="col-12">
+            <div class="inner-container px-3 px-md-0">
+                <div class="row m-3">
+                    <h1 class="col-12 text-center">Password Generator</h1>
                 </div>
-                <input type="text" name="password-length-box" id="password-length-box" class="col-2">
-            </div>
-            <div class="row char-options">
-                <div class="option-box col-12 col-md-6 d-flex flex-md-column justify-content-between justify-content-md-center align-items-center mb-2 ">
-                    <input type="checkbox" name="uppercase" id="uppercase-check">
-                    <label for="uppercase-check">Uppercase</label>
+                <div class="row mb-3">
+                    <textarea name="password-out" id="password-out" cols="30" rows="10" class="col-12"></textarea>
                 </div>
-                <div class="option-box col-12 col-md-6 d-flex flex-md-column justify-content-between justify-content-md-center align-items-center mb-2">
-                    <input type="checkbox" name="lowercase" id="lowercase-check">
-                    <label for="lowercase-check">Lowercase</label>
+                <div class="row length-options mb-2 d-flex flex-column-reverse align-items-center">
+                    <div class="slider-container col-10">
+                        <input type="range" name="password-length-slider" id="password-length-slider" class="col-12">
+                    </div>
+                    <input type="text" name="password-length-box" id="password-length-box" class="col-2 mb-2">
                 </div>
-                <div class="option-box col-12 col-md-6 d-flex flex-md-column justify-content-between justify-content-md-center align-items-center mb-2">
-                    <input type="checkbox" name="numbers" id="numbers-check">
-                    <label for="numbers-check">Numbers</label>
+                <div class="row char-options">
+                    <div
+                        class="option-box col-12 col-md-6 d-flex flex-md-column-reverse justify-content-between justify-content-md-center align-items-center mb-2 ">
+                        <label for="uppercase-check">Uppercase</label>
+                        <input type="checkbox" name="uppercase" id="uppercase-check">
+                    </div>
+                    <div
+                        class="option-box col-12 col-md-6 d-flex flex-md-column-reverse justify-content-between justify-content-md-center align-items-center mb-2">
+                        <label for="lowercase-check">Lowercase</label>
+                        <input type="checkbox" name="lowercase" id="lowercase-check">
+                    </div>
+                    <div
+                        class="option-box col-12 col-md-6 d-flex flex-md-column-reverse justify-content-between justify-content-md-center align-items-center mb-2">
+                        <label for="numbers-check">Numbers</label>
+                        <input type="checkbox" name="numbers" id="numbers-check">
+                    </div>
+                    <div
+                        class="option-box col-12 col-md-6 d-flex flex-md-column-reverse justify-content-between justify-content-md-center align-items-center mb-2">
+                        <label for="symbols-check">Symbols</label>
+                        <input type="checkbox" name="symbols" id="symbols-check">
+                    </div>
                 </div>
-                <div class="option-box col-12 col-md-6 d-flex flex-md-column justify-content-between justify-content-md-center align-items-center mb-2">
-                    <input type="checkbox" name="symbols" id="symbols-check">
-                    <label for="symbols-check">Symbols</label>
-                </div>
-            </div>
 
+                <div class="row buttons d-flex flex-column flex-md-row justify-content-around align-items-center px-3">
+                    <button class="gen-button mb-2 col-12" id="gen-button">Generate Password</button>
+                    <button class="copy-button col-12" id="copy-button">Copy to Clipboard</button>
+                </div>
+            </div>
         </div>
+
 
 
         <!-- JQuery -->
