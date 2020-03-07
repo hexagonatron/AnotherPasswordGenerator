@@ -33,20 +33,24 @@ var passwordLength = 12;
 //Functions to generate specific random characters
 
 var genUpper = () => {
-    return String.fromCharCode(Math.floor(Math.random() * 26 + 65))
+    var character = String.fromCharCode(Math.floor(Math.random() * 26 + 65));
+    return ["letterChar", character];
 }
 
 var genLower = () => {
-    return String.fromCharCode(Math.floor(Math.random() * 26 + 97))
+    var character= String.fromCharCode(Math.floor(Math.random() * 26 + 97));
+    return ["letterChar", character];
 }
 
 var genNum = () => {
-    return String.fromCharCode(Math.floor(Math.random() * 10 + 48))
+    var character = String.fromCharCode(Math.floor(Math.random() * 10 + 48));
+    return ["numberChar", character];
 }
 
 var genSymb = () => {
     const symb = "!@#$%^&*()-=+_?"
-    return symb[Math.floor(Math.random() * symb.length)]
+    var character = symb[Math.floor(Math.random() * symb.length)];
+    return ["symbolChar", character];
 }
 
 var genPopups = () => {
@@ -115,20 +119,21 @@ var genPassword = () => {
 
     //if there are functions in the array, i.e. at least one box is checked then gen the password
     if (availableFunctions.length) {
-        var password = "";
+        var passwordHTML = "";
 
         for (i = 0; i < passwordLength; i++) {
             //gen random number that will correspond to a function to call
             var rand = Math.floor(Math.random() * availableFunctions.length);
 
             //generate single random character by calling one of the functions in the availible functions array
-            var randChar = availableFunctions[rand]();
+            var randCharArray = availableFunctions[rand]();
 
             //append password to password output
-            password += randChar;
+            passwordHTML += `<span class=\"${randCharArray[0]}\">${randCharArray[1]}</span>`;
+            
         }
 
-        passwordOut.innerText = password;
+        passwordOut.innerHTML = passwordHTML;
 
     } else {
         //executes if no boxes are checked
@@ -149,7 +154,7 @@ var copyPassword = () => {
     var textArea = document.createElement("textarea");
     textArea.value = passwordToCopy;
 
-    //So we never see it almost as if it was never there to begin with 
+    //So we never see it. Almost as if it was never there to begin with 
     textArea.style.position = "absolute";
     textArea.style.top = "-99999999999px";
     document.body.appendChild(textArea);

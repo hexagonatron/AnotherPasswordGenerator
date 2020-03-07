@@ -41,4 +41,19 @@
 .password-out {
     font-family: 'Courier Prime', monospace;
     word-break: break-all;
+    font-weight: bold;
+}
+
+/* Letter styling */
+
+.letterChar {
+    color: blue;
+}
+
+.numberChar {
+    color: red;
+}
+
+.symbolChar {
+    color: green;
 }
