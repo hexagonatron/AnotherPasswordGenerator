@@ -1,11 +1,11 @@
 
-#password-length-slider::-webkit-slider-thumb {
+.dark-mode #password-length-slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
     background: #adb5bd;
 }
 
-.custom-control-input:checked~.custom-control-label::before {
+.dark-mode .custom-control-input:checked~.custom-control-label::before {
     background-color: rgb(46, 46, 46);
     border: rgb(46, 46, 46);
 }
@@ -45,14 +45,37 @@
 
 /* Letter styling */
 
-.letterChar {
+.dark-mode .letterChar {
     color: rgb(0, 0, 175);
 }
 
-.numberChar {
+.dark-mode .numberChar {
     color: rgb(175, 0, 0);
 }
 
-.symbolChar {
+.dark-mode .symbolChar {
+    color: rgb(0, 100, 0);
+}
+
+.light-mode .letterChar {
+    color: blue;
+}
+
+.light-mode .numberChar {
+    color: red;
+}
+
+.light-mode .symbolChar {
     color: rgb(0, 175, 0);
+}
+
+/* Lightmode styling */
+
+.light-mode .password-out {
+    border: 2px solid black;
+}
+
+.light-mode #password-length-box {
+    border: 2px solid black;
+    font-weight: bold;
 }

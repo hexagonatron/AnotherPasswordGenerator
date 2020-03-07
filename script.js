@@ -22,6 +22,10 @@ let passwordOut = document.querySelector(".password-out");
 
 let optionBoxes = document.querySelectorAll("input.password-option[type=\"checkbox\"");
 
+let allButtons = document.querySelectorAll("button");
+
+let darkModeSwitch = document.querySelector(".darkmode-switch");
+
 //initial states of all page elements
 var containsUpper = true;
 var containsLower = true;
@@ -205,3 +209,25 @@ optionBoxes.forEach((box) => {
         }
     });
 });
+
+darkModeSwitch.addEventListener("change",(e) => {
+    //toogle master class
+    document.body.classList.toggle("light-mode");
+    document.body.classList.toggle("dark-mode");
+
+    //toggle backgrounds
+    document.body.classList.toggle("bg-dark");
+    document.body.classList.toggle("bg-white");
+
+    //Toggle Text
+    document.body.classList.toggle("text-white");
+    document.body.classList.toggle("text-dark");
+
+    //Toggle button classes
+    allButtons.forEach(button => {
+        button.classList.toggle("btn-elegant");
+        button.classList.toggle("btn-primary");
+
+    })
+
+})
