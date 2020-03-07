@@ -18,6 +18,8 @@ let copyBut = document.querySelector("#copy-button");
 
 let genPopupBut = document.querySelector("#gen-popup-button");
 
+let passwordOut = document.querySelector(".password-out");   
+
 //initial states of all page elements
 var containsUpper = true;
 var containsLower = true;
@@ -77,20 +79,60 @@ var genPopups = () => {
 
 
     //if all false reprompt
-    if(!(containsUpper&&containsLower&&containsNum&&containsSymb)){
+    if(!(containsUpper||containsLower||containsNum||containsSymb)){
         alert("Your password must contain some characters. Let's start again");
 
         genPopups();
 
-        //if not all false, call gen password function
+        
     } else {
+        //if not all false, call gen password function
         genPassword();
     }
 
 }
 
-//
+//Fn to generate a password
 var genPassword = () => {
+
+    var availableFunctions = [];
+    
+    //Update variables
+    containsUpper = upperSwitch.checked;
+    containsLower = lowerSwitch.checked;
+    containsNum = numberSwitch.checked;
+    containsSymb = symbolSwitch.checked;
+
+    passwordLength = lengthText.value;
+
+    //depending on what's checked, push functions to available characters array to call later
+    if(containsUpper){availableFunctions.push(genUpper)};
+    if(containsLower){availableFunctions.push(genLower)};
+    if(containsNum){availableFunctions.push(genNum)};
+    if(containsSymb){availableFunctions.push(genSymb)};
+
+    //if there are functions in the array, i.e. at least one box is checked then gen the password
+    if(availableFunctions.length) {
+        var password = "";
+
+        for (i = 0; i < passwordLength; i++){
+            //gen random number that will correspond to a function to call
+            var rand = Math.floor(Math.random()* availableFunctions.length);
+
+            //generate single random character by calling one of the functions in the availible functions array
+            var randChar = availableFunctions[rand]();
+
+            //append password to password output
+            password += randChar;
+        }
+
+        passwordOut.innerText = password;
+
+    } else {
+        //executes if no boxes are checked
+    }
+
+
 
 }
 
