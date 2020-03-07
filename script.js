@@ -22,6 +22,8 @@ let passwordOut = document.querySelector(".password-out");
 
 let optionBoxes = document.querySelectorAll("input.password-option[type=\"checkbox\"");
 
+let footerElement = document.querySelector("footer");
+
 let allButtons = document.querySelectorAll("button");
 
 let darkModeSwitch = document.querySelector(".darkmode-switch");
@@ -98,6 +100,7 @@ var genPopups = () => {
     } else {
         //if not all false, call gen password function
         genPassword();
+        genPasswordBut.disabled = false;
     }
 
 }
@@ -228,6 +231,10 @@ darkModeSwitch.addEventListener("change",(e) => {
         button.classList.toggle("btn-elegant");
         button.classList.toggle("btn-primary");
 
-    })
+    });
+
+    //Toggle footer classes
+    footerElement.classList.toggle("bg-primary");
+    footerElement.classList.toggle("text-white");
 
 })
