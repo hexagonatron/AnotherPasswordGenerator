@@ -20,7 +20,7 @@ let genPopupBut = document.querySelector("#gen-popup-button");
 
 let passwordOut = document.querySelector(".password-out");
 
-let optionBoxes = document.querySelectorAll("input[type=\"checkbox\"");
+let optionBoxes = document.querySelectorAll("input.password-option[type=\"checkbox\"");
 
 //initial states of all page elements
 var containsUpper = true;

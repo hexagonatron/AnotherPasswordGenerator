@@ -13,9 +13,14 @@
 .password-out {
     background-color: white;
     color: black;
-    padding: 1rem;
+    box-sizing: content-box;
     margin-bottom: 1rem;
     width: 100%;
+    font-family: 'Courier Prime', monospace;
+    word-break: break-all;
+    font-weight: bold;
+    padding: 8px;
+    min-height: 24px;
 }
 
 #password-length-box {
@@ -36,12 +41,6 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-}
-
-.password-out {
-    font-family: 'Courier Prime', monospace;
-    word-break: break-all;
-    font-weight: bold;
 }
 
 /* Letter styling */
