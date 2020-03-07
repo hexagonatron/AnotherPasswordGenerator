@@ -40,4 +40,5 @@
 
 .password-out {
     font-family: 'Courier Prime', monospace;
+    word-break: break-all;
 }

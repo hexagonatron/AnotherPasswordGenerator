@@ -18,7 +18,9 @@ let copyBut = document.querySelector("#copy-button");
 
 let genPopupBut = document.querySelector("#gen-popup-button");
 
-let passwordOut = document.querySelector(".password-out");   
+let passwordOut = document.querySelector(".password-out");
+
+let optionBoxes = document.querySelectorAll("input[type=\"checkbox\"");
 
 //initial states of all page elements
 var containsUpper = true;
@@ -44,16 +46,16 @@ var genNum = () => {
 
 var genSymb = () => {
     const symb = "!@#$%^&*()-=+_?"
-    return symb[Math.floor(Math.random() * symb.length )]
+    return symb[Math.floor(Math.random() * symb.length)]
 }
 
 var genPopups = () => {
 
     //prompt for length
     passwordLength = prompt("How many characters would you like your password to be? \n(8 - 128)");
-    
+
     //validation
-    while((typeof passwordLength !== 'number') && (passwordLength < 8 || passwordLength > 128)){
+    while ((typeof passwordLength !== 'number') && (passwordLength < 8 || passwordLength > 128)) {
         passwordLength = prompt("How many characters would you like your password to be? \n(8 - 128)\nOnly integer numbers from 8-128 are accepted");
     }
 
@@ -79,12 +81,12 @@ var genPopups = () => {
 
 
     //if all false reprompt
-    if(!(containsUpper||containsLower||containsNum||containsSymb)){
+    if (!(containsUpper || containsLower || containsNum || containsSymb)) {
         alert("Your password must contain some characters. Let's start again");
 
         genPopups();
 
-        
+
     } else {
         //if not all false, call gen password function
         genPassword();
@@ -96,7 +98,7 @@ var genPopups = () => {
 var genPassword = () => {
 
     var availableFunctions = [];
-    
+
     //Update variables
     containsUpper = upperSwitch.checked;
     containsLower = lowerSwitch.checked;
@@ -106,18 +108,18 @@ var genPassword = () => {
     passwordLength = lengthText.value;
 
     //depending on what's checked, push functions to available characters array to call later
-    if(containsUpper){availableFunctions.push(genUpper)};
-    if(containsLower){availableFunctions.push(genLower)};
-    if(containsNum){availableFunctions.push(genNum)};
-    if(containsSymb){availableFunctions.push(genSymb)};
+    if (containsUpper) { availableFunctions.push(genUpper) };
+    if (containsLower) { availableFunctions.push(genLower) };
+    if (containsNum) { availableFunctions.push(genNum) };
+    if (containsSymb) { availableFunctions.push(genSymb) };
 
     //if there are functions in the array, i.e. at least one box is checked then gen the password
-    if(availableFunctions.length) {
+    if (availableFunctions.length) {
         var password = "";
 
-        for (i = 0; i < passwordLength; i++){
+        for (i = 0; i < passwordLength; i++) {
             //gen random number that will correspond to a function to call
-            var rand = Math.floor(Math.random()* availableFunctions.length);
+            var rand = Math.floor(Math.random() * availableFunctions.length);
 
             //generate single random character by calling one of the functions in the availible functions array
             var randChar = availableFunctions[rand]();
@@ -130,6 +132,7 @@ var genPassword = () => {
 
     } else {
         //executes if no boxes are checked
+
     }
 
 
@@ -160,3 +163,20 @@ lengthText.addEventListener("input", (e) => {
     console.log(lengthText.value);
     lengthSlider.value = lengthText.value;
 });
+
+//Attaches an event listener to every switch on the page
+optionBoxes.forEach((box) => {
+
+    //When a switch is toggled
+    box.addEventListener("change", (e) => {
+
+        //If all switches are off disable the gen password button
+        if (!(upperSwitch.checked || lowerSwitch.checked || numberSwitch.checked || symbolSwitch.checked)) {
+            genPasswordBut.disabled = true;
+        } else {
+            //if any switches are true button is enabled
+            genPasswordBut.disabled = false;
+        }
+    });
+});
+    
