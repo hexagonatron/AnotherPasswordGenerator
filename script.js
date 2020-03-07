@@ -139,8 +139,28 @@ var genPassword = () => {
 
 }
 
+//Fn to copy password to clipboard
 var copyPassword = () => {
 
+    //gets current password
+    var passwordToCopy = passwordOut.innerText;
+
+    //creates phantom textarea to copy from
+    var textArea = document.createElement("textarea");
+    textArea.value = passwordToCopy;
+
+    //So we never see it almost as if it was never there to begin with 
+    textArea.style.position = "absolute";
+    textArea.style.top = "-99999999999px";
+    document.body.appendChild(textArea);
+
+    //Where the magic happens
+    textArea.select();
+    textArea.setSelectionRange(0, 999);
+    document.execCommand("copy");
+
+    //And just like that it vanishes
+    document.body.removeChild(textArea);
 }
 
 
@@ -179,4 +199,3 @@ optionBoxes.forEach((box) => {
         }
     });
 });
-    
