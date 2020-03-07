@@ -47,13 +47,13 @@
 /* Letter styling */
 
 .letterChar {
-    color: blue;
+    color: rgb(0, 0, 175);
 }
 
 .numberChar {
-    color: red;
+    color: rgb(175, 0, 0);
 }
 
 .symbolChar {
-    color: green;
+    color: rgb(0, 175, 0);
 }

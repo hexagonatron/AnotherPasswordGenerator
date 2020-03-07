@@ -133,15 +133,16 @@ var genPassword = () => {
             
         }
 
+        //Output password to page
         passwordOut.innerHTML = passwordHTML;
+
+        //Enable copy button
+        copyBut.disabled = false;
 
     } else {
         //executes if no boxes are checked
 
     }
-
-
-
 }
 
 //Fn to copy password to clipboard
