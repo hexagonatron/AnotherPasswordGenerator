@@ -20,7 +20,9 @@ In this project I have designed an application to generate a secure random passw
 * The switch in the top left corner will toggle a dark mode on and off
 * Layout is responsive so that it looks consistent across all screen sizes
 * Password output characters are coloured by type (letter, number or symbol) for easier reading
-Features added after submission deadline:
+
+#### Features added after submission deadline:
+
 * Added switch that will generate a bad password (if one would so desire)
 * Password is now animated on display
 
