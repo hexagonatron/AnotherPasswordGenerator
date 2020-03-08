@@ -120,6 +120,12 @@ var genPassword = () => {
 
     var password = ""
 
+    if(lengthText.value > 128){
+        lengthText.value = 128
+    } else if(lengthText.value < 8) {
+        lengthText.value = 8;
+    }
+
     //if generating a bad password
     if (badPasswordSwitch.checked) {
 
