@@ -42,7 +42,9 @@ var passwordLength = 12;
 var containsUpperTemp = upperSwitch.checked;
 var containsLowerTemp = lowerSwitch.checked;
 var containsNumTemp = numberSwitch.checked;
-var containsSymbTemp = symbolSwitch.checked
+var containsSymbTemp = symbolSwitch.checked;
+
+var passwordGlobal = "";
 
 //Functions to generate specific random characters
 
@@ -162,70 +164,97 @@ var genPassword = () => {
         }
     }
 
-    //Format the password so that each character is coloured accordingly
+    //Put password through scrambler
     scrambleDisplay(password);
+
+    //Send password to global scope, mainly so that copy button works while password is being scrambled
+    passwordGlobal = password;
 
     //Enable copy button
     copyBut.disabled = false;
 }
 
+//function to display scrambled password
 var scrambleDisplay = (inputString) => {
 
+    //randoms chars to pick from
     const randomChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-=+_?";
 
-    const milis = 1000;
-    const interval = 30;
-    length = inputString.length;
-    console.log(length);
-
-    var steps = milis / interval;
+    //timing variables
+    const milis = 500;
+    const interval = 20;
+    var length = inputString.length;
+    var steps = Math.ceil(milis / interval);
     var LetPerStep = length / steps;
     var currentStep = 1;
 
-    console.log(steps);
-
+    //timing function to call each step until completion
     var scrambler = setInterval(() => {
-        var toPrint = ""
+        //start with blank string
+        var toPrint = "";
+
+        //iterate through total string length
         for (i = 0; i < length; i++) {
+
+            //if before current step print the correct letter
             if (i <= (LetPerStep * currentStep)) {
                 toPrint += inputString[i];
+
             } else {
+                //if after current step then print a random letter
                 toPrint += randomChars[Math.floor(Math.random() * randomChars.length)];
             }
         }
-
-        console.log(`${toPrint}                     CurrentStep: ${currentStep}`);
+        //send string to formatting function to be displayed on page
         formatDisplayPassword(toPrint);
 
+        //increase step
         currentStep++;
 
+        //End condition
         if (currentStep > steps) {
             clearInterval(scrambler);
-            console.log(inputString);
         }
     }, interval);
 }
 
+//Formats the string with spans to make coulorful
 var formatDisplayPassword = (inputString) => {
+
+    //characters to format based on
     const charArrays = [
         "abcdefghijklmnopqrstuvwxyz",
         "0123456789",
         "!@#$%^&*()-=+_?"
     ];
 
+    //initialise output
     var outputHTML = ""
+
+    //iterate through string
     for (i = 0; i < inputString.length; i++) {
+
+
         if (charArrays[0].indexOf(inputString[i].toLowerCase()) >= 0) {
+            //if char is a letter give class of letter
             outputHTML += `<span class=\"letterChar\">${inputString[i]}</span>`;
+
         } else if (charArrays[1].indexOf(inputString[i]) >= 0) {
+
+            //if char is number give class of number
             outputHTML += `<span class=\"numberChar\">${inputString[i]}</span>`;
         } else if (charArrays[2].indexOf(inputString[i]) >= 0) {
+
+            //if char is symbol give class of symbol
             outputHTML += `<span class=\"symbolChar\">${inputString[i]}</span>`;
         } else {
+
+            //if not found in any of the arrays give class of otherchar
             outputHTML += `<span class=\"otherChar\">${inputString[i]}</span>`;
         }
     }
 
+    //display output on page
     passwordOut.innerHTML = outputHTML;
 
 }
@@ -234,7 +263,7 @@ var formatDisplayPassword = (inputString) => {
 var copyPassword = () => {
 
     //gets current password
-    var passwordToCopy = passwordOut.innerText;
+    var passwordToCopy = passwordGlobal;
 
     //creates phantom textarea to copy from
     var textArea = document.createElement("textarea");
@@ -266,7 +295,6 @@ copyBut.addEventListener("click", copyPassword);
 
 //Event listeners to detect change in password length slider or change in password length text box
 lengthSlider.addEventListener("input", (e) => {
-    console.log(lengthSlider.value);
     lengthText.value = lengthSlider.value;
 });
 
@@ -299,7 +327,7 @@ optionBoxes.forEach((box) => {
             numberSwitch.checked = containsNumTemp;
             symbolSwitch.checked = containsSymbTemp;
 
-            //if switch was off it would reset to off to must override
+            //if switch was off it would reset to off so must override
             e.currentTarget.checked = true;
 
         }
@@ -351,6 +379,7 @@ badPasswordSwitch.addEventListener("change", (e) => {
         symbolSwitch.checked = false;
         numberSwitch.checked = false;
 
+        //if gen password button was disabled due to state of the other switches then turn it back on
         genPasswordBut.disabled = false;
 
 
