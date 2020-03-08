@@ -20,6 +20,9 @@ In this project I have designed an application to generate a secure random passw
 * The switch in the top left corner will toggle a dark mode on and off
 * Layout is responsive so that it looks consistent across all screen sizes
 * Password output characters are coloured by type (letter, number or symbol) for easier reading
+Features added after submission deadline:
+* Added switch that will generate a bad password (if one would so desire)
+* Password is now animated on display
 
 ## Technlogies Used
 
@@ -31,7 +34,8 @@ In this project I have designed an application to generate a secure random passw
 * [FontAwesome](https://fontawesome.com/)
 
 ## Notes
-Adapted from a [password generator](https://hexagonatron.github.io/PasswordGenerator/) I had designed previously.
+* Adapted from a [password generator](https://hexagonatron.github.io/PasswordGenerator/) I had designed previously.
+* Features were added after submission deadline. To see files at before submission deadline click [here](https://github.com/hexagonatron/AnotherPasswordGenerator/tree/7d3075d97e3eb01d0fc3423c247c2233c662f740)
 
 ## Author
 
