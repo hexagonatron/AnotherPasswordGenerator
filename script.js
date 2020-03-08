@@ -118,10 +118,18 @@ var genPassword = () => {
 
     var password = ""
 
+    //if generating a bad password
     if (badPasswordSwitch.checked) {
 
-    } else {
+        //Gen rand number that less than array length
+        var randIndex = Math.floor(Math.random()* badpasswords.length);
 
+        //retrive the password
+        password = badpasswords[randIndex];
+
+    
+    } else {
+        //generate a strong password
 
 
         var availableFunctions = [];
