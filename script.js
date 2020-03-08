@@ -122,12 +122,12 @@ var genPassword = () => {
     if (badPasswordSwitch.checked) {
 
         //Gen rand number that less than array length
-        var randIndex = Math.floor(Math.random()* badpasswords.length);
+        var randIndex = Math.floor(Math.random() * badpasswords.length);
 
         //retrive the password
         password = badpasswords[randIndex];
 
-    
+
     } else {
         //generate a strong password
 
@@ -163,15 +163,50 @@ var genPassword = () => {
     }
 
     //Format the password so that each character is coloured accordingly
-    var passwordHTML = formatPassword(password);
-
-    passwordOut.innerHTML = passwordHTML;
+    scrambleDisplay(password);
 
     //Enable copy button
     copyBut.disabled = false;
 }
 
-var formatPassword = (inputString) => {
+var scrambleDisplay = (inputString) => {
+
+    const randomChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-=+_?";
+
+    const milis = 1000;
+    const interval = 30;
+    length = inputString.length;
+    console.log(length);
+
+    var steps = milis / interval;
+    var LetPerStep = length / steps;
+    var currentStep = 1;
+
+    console.log(steps);
+
+    var scrambler = setInterval(() => {
+        var toPrint = ""
+        for (i = 0; i < length; i++) {
+            if (i <= (LetPerStep * currentStep)) {
+                toPrint += inputString[i];
+            } else {
+                toPrint += randomChars[Math.floor(Math.random() * randomChars.length)];
+            }
+        }
+
+        console.log(`${toPrint}                     CurrentStep: ${currentStep}`);
+        formatDisplayPassword(toPrint);
+
+        currentStep++;
+
+        if (currentStep > steps) {
+            clearInterval(scrambler);
+            console.log(inputString);
+        }
+    }, interval);
+}
+
+var formatDisplayPassword = (inputString) => {
     const charArrays = [
         "abcdefghijklmnopqrstuvwxyz",
         "0123456789",
@@ -191,7 +226,7 @@ var formatPassword = (inputString) => {
         }
     }
 
-    return outputHTML;
+    passwordOut.innerHTML = outputHTML;
 
 }
 
@@ -255,7 +290,7 @@ optionBoxes.forEach((box) => {
         }
 
         //if badpassword switch is on turn off and restore state of other switches
-        if(badPasswordSwitch.checked){
+        if (badPasswordSwitch.checked) {
             badPasswordSwitch.checked = false;
 
             //restore all previous states
