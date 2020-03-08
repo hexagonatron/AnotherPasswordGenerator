@@ -28,6 +28,8 @@ let allButtons = document.querySelectorAll("button");
 
 let darkModeSwitch = document.querySelector(".darkmode-switch");
 
+let badPasswordSwitch = document.querySelector(".bad-password-switch");
+
 //initial states of all page elements
 var containsUpper = true;
 var containsLower = true;
@@ -36,27 +38,35 @@ var containsSymb = true;
 
 var passwordLength = 12;
 
+//Temp variables to remember state of switches
+var containsUpperTemp = upperSwitch.checked;
+var containsLowerTemp = lowerSwitch.checked;
+var containsNumTemp = numberSwitch.checked;
+var containsSymbTemp = symbolSwitch.checked;
+
+var passwordGlobal = "";
+
 //Functions to generate specific random characters
 
 var genUpper = () => {
     var character = String.fromCharCode(Math.floor(Math.random() * 26 + 65));
-    return ["letterChar", character];
+    return character;
 }
 
 var genLower = () => {
-    var character= String.fromCharCode(Math.floor(Math.random() * 26 + 97));
-    return ["letterChar", character];
+    var character = String.fromCharCode(Math.floor(Math.random() * 26 + 97));
+    return character;
 }
 
 var genNum = () => {
     var character = String.fromCharCode(Math.floor(Math.random() * 10 + 48));
-    return ["numberChar", character];
+    return character;
 }
 
 var genSymb = () => {
     const symb = "!@#$%^&*()-=+_?"
     var character = symb[Math.floor(Math.random() * symb.length)];
-    return ["symbolChar", character];
+    return character;
 }
 
 var genPopups = () => {
@@ -108,55 +118,152 @@ var genPopups = () => {
 //Fn to generate a password
 var genPassword = () => {
 
-    var availableFunctions = [];
+    var password = ""
 
-    //Update variables
-    containsUpper = upperSwitch.checked;
-    containsLower = lowerSwitch.checked;
-    containsNum = numberSwitch.checked;
-    containsSymb = symbolSwitch.checked;
+    //if generating a bad password
+    if (badPasswordSwitch.checked) {
 
-    passwordLength = lengthText.value;
+        //Gen rand number that less than array length
+        var randIndex = Math.floor(Math.random() * badpasswords.length);
 
-    //depending on what's checked, push functions to available characters array to call later
-    if (containsUpper) { availableFunctions.push(genUpper) };
-    if (containsLower) { availableFunctions.push(genLower) };
-    if (containsNum) { availableFunctions.push(genNum) };
-    if (containsSymb) { availableFunctions.push(genSymb) };
+        //retrive the password
+        password = badpasswords[randIndex];
 
-    //if there are functions in the array, i.e. at least one box is checked then gen the password
-    if (availableFunctions.length) {
-        var passwordHTML = "";
-
-        for (i = 0; i < passwordLength; i++) {
-            //gen random number that will correspond to a function to call
-            var rand = Math.floor(Math.random() * availableFunctions.length);
-
-            //generate single random character by calling one of the functions in the availible functions array
-            var randCharArray = availableFunctions[rand]();
-
-            //append password to password output
-            passwordHTML += `<span class=\"${randCharArray[0]}\">${randCharArray[1]}</span>`;
-            
-        }
-
-        //Output password to page
-        passwordOut.innerHTML = passwordHTML;
-
-        //Enable copy button
-        copyBut.disabled = false;
 
     } else {
-        //executes if no boxes are checked
+        //generate a strong password
 
+
+        var availableFunctions = [];
+
+        //Update variables
+        containsUpper = upperSwitch.checked;
+        containsLower = lowerSwitch.checked;
+        containsNum = numberSwitch.checked;
+        containsSymb = symbolSwitch.checked;
+
+        passwordLength = lengthText.value;
+
+        //depending on what's checked, push functions to available characters array to call later
+        if (containsUpper) { availableFunctions.push(genUpper) };
+        if (containsLower) { availableFunctions.push(genLower) };
+        if (containsNum) { availableFunctions.push(genNum) };
+        if (containsSymb) { availableFunctions.push(genSymb) };
+
+        //if there are functions in the array, i.e. at least one box is checked then gen the password
+        if (availableFunctions.length) {
+
+            for (i = 0; i < passwordLength; i++) {
+                //gen random number that will correspond to a function to call
+                var rand = Math.floor(Math.random() * availableFunctions.length);
+
+                //generate single random character by calling one of the functions in the availible functions array and append to password string
+                password += availableFunctions[rand]();
+
+            }
+        }
     }
+
+    //Put password through scrambler
+    scrambleDisplay(password);
+
+    //Send password to global scope, mainly so that copy button works while password is being scrambled
+    passwordGlobal = password;
+
+    //Enable copy button
+    copyBut.disabled = false;
+}
+
+//function to display scrambled password
+var scrambleDisplay = (inputString) => {
+
+    //randoms chars to pick from
+    const randomChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-=+_?";
+
+    //timing variables
+    const milis = 500;
+    const interval = 20;
+    var length = inputString.length;
+    var steps = Math.ceil(milis / interval);
+    var LetPerStep = length / steps;
+    var currentStep = 1;
+
+    //timing function to call each step until completion
+    var scrambler = setInterval(() => {
+        //start with blank string
+        var toPrint = "";
+
+        //iterate through total string length
+        for (i = 0; i < length; i++) {
+
+            //if before current step print the correct letter
+            if (i <= (LetPerStep * currentStep)) {
+                toPrint += inputString[i];
+
+            } else {
+                //if after current step then print a random letter
+                toPrint += randomChars[Math.floor(Math.random() * randomChars.length)];
+            }
+        }
+        //send string to formatting function to be displayed on page
+        formatDisplayPassword(toPrint);
+
+        //increase step
+        currentStep++;
+
+        //End condition
+        if (currentStep > steps) {
+            clearInterval(scrambler);
+        }
+    }, interval);
+}
+
+//Formats the string with spans to make coulorful
+var formatDisplayPassword = (inputString) => {
+
+    //characters to format based on
+    const charArrays = [
+        "abcdefghijklmnopqrstuvwxyz",
+        "0123456789",
+        "!@#$%^&*()-=+_?"
+    ];
+
+    //initialise output
+    var outputHTML = ""
+
+    //iterate through string
+    for (i = 0; i < inputString.length; i++) {
+
+
+        if (charArrays[0].indexOf(inputString[i].toLowerCase()) >= 0) {
+            //if char is a letter give class of letter
+            outputHTML += `<span class=\"letterChar\">${inputString[i]}</span>`;
+
+        } else if (charArrays[1].indexOf(inputString[i]) >= 0) {
+
+            //if char is number give class of number
+            outputHTML += `<span class=\"numberChar\">${inputString[i]}</span>`;
+        } else if (charArrays[2].indexOf(inputString[i]) >= 0) {
+
+            //if char is symbol give class of symbol
+            outputHTML += `<span class=\"symbolChar\">${inputString[i]}</span>`;
+        } else {
+
+            //if not found in any of the arrays give class of otherchar
+            outputHTML += `<span class=\"otherChar\">${inputString[i]}</span>`;
+        }
+    }
+
+    //display output on page
+    passwordOut.innerHTML = outputHTML;
+
 }
 
 //Fn to copy password to clipboard
 var copyPassword = () => {
 
     //gets current password
-    var passwordToCopy = passwordOut.innerText;
+    var passwordToCopy = passwordGlobal;
 
     //creates phantom textarea to copy from
     var textArea = document.createElement("textarea");
@@ -188,7 +295,6 @@ copyBut.addEventListener("click", copyPassword);
 
 //Event listeners to detect change in password length slider or change in password length text box
 lengthSlider.addEventListener("input", (e) => {
-    console.log(lengthSlider.value);
     lengthText.value = lengthSlider.value;
 });
 
@@ -210,10 +316,26 @@ optionBoxes.forEach((box) => {
             //if any switches are true button is enabled
             genPasswordBut.disabled = false;
         }
+
+        //if badpassword switch is on turn off and restore state of other switches
+        if (badPasswordSwitch.checked) {
+            badPasswordSwitch.checked = false;
+
+            //restore all previous states
+            upperSwitch.checked = containsUpperTemp;
+            lowerSwitch.checked = containsLowerTemp;
+            numberSwitch.checked = containsNumTemp;
+            symbolSwitch.checked = containsSymbTemp;
+
+            //if switch was off it would reset to off so must override
+            e.currentTarget.checked = true;
+
+        }
+
     });
 });
 
-darkModeSwitch.addEventListener("change",(e) => {
+darkModeSwitch.addEventListener("change", (e) => {
     //toogle master class
     document.body.classList.toggle("light-mode");
     document.body.classList.toggle("dark-mode");
@@ -236,5 +358,42 @@ darkModeSwitch.addEventListener("change",(e) => {
     //Toggle footer classes
     footerElement.classList.toggle("bg-primary");
     footerElement.classList.toggle("text-white");
+
+})
+
+//Bad password switch behaviour
+badPasswordSwitch.addEventListener("change", (e) => {
+
+    //if bad password switch is turned on
+    if (badPasswordSwitch.checked) {
+
+        //remember states of other switches
+        containsUpperTemp = upperSwitch.checked;
+        containsLowerTemp = lowerSwitch.checked;
+        containsNumTemp = numberSwitch.checked;
+        containsSymbTemp = symbolSwitch.checked;
+
+        //Turn other switches off
+        upperSwitch.checked = false;
+        lowerSwitch.checked = false;
+        symbolSwitch.checked = false;
+        numberSwitch.checked = false;
+
+        //if gen password button was disabled due to state of the other switches then turn it back on
+        genPasswordBut.disabled = false;
+
+
+    } else {
+        //if bad password switch is turned off restore previous states
+        upperSwitch.checked = containsUpperTemp;
+        lowerSwitch.checked = containsLowerTemp;
+        numberSwitch.checked = containsNumTemp;
+        symbolSwitch.checked = containsSymbTemp;
+
+        //If all buttons off disable gen password button
+        if (!(upperSwitch.checked || lowerSwitch.checked || numberSwitch.checked || symbolSwitch.checked)) {
+            genPasswordBut.disabled = true;
+        }
+    }
 
 })
